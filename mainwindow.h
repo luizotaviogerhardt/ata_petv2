@@ -7,6 +7,7 @@
 class MainWindow : public QMainWindow, private Ui::MainWindow
 {
     Q_OBJECT
+    std::vector <comissao> comissoes;
 
 
 public:

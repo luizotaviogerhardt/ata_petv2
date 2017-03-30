@@ -9,6 +9,9 @@ class ItemView : public QWidget, private Ui::ItemView
 
 public:
     explicit ItemView(QWidget *parent = 0);
+    ItemView(QString &string);
+    void setLabel(QString &string);
+
 };
 
 #endif // ITEMVIEW_H

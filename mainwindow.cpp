@@ -13,11 +13,21 @@
 #include "comissao.h"
 #include <QVector>
 #include <QStringList>
+#include <stdio.h>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent)
 {
     setupUi(this);
+
+    for (int i = 0; i < 20; ++i) {
+        QListWidgetItem *item = new QListWidgetItem;
+        item->setSizeHint(QSize(150, 80));
+        listWidget->addItem(item);
+        QString teste = "sfoaihfsao";
+        ItemView *botao = new ItemView();
+        listWidget->setItemWidget(item, botao);             //Sets the widget to be displayed in the given item. This function should only be used to display static content in the place of a list widget item. If you want to display custom dynamic content or implement a custom editor widget, use QListView and subclass QItemDelegate instead.
+    }
 
 
     QFile file("/home/luizotavio/bd.ata");
@@ -26,10 +36,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QTextStream in(&file);
 
-    std::vector <comissao> comissoes;
-
     int id=1;
-    while (!in.atEnd())
+    while(!in.atEnd())
     {
         QString line = in.readLine();
         QStringList strList=line.split("/");
@@ -43,10 +51,16 @@ MainWindow::MainWindow(QWidget *parent) :
 
     file.close();
 
-    for (int i = 0; i < 20; ++i) {
+    /*for(int i =0; i <comissoes.size();i++)
+    {
         QListWidgetItem *item = new QListWidgetItem;
-        item->setSizeHint(QSize(150, 80));
-        listWidget->addItem(item);
-        listWidget->setItemWidget(item, new ItemView);
-    }
+        item = listWidget->currentItem();
+        item->setText(comissoes[i].getNome());
+    }*/
+
+
+
+    //ui->scrollContents->setContentsMargins(0,0,0,0);
+
+
 }
