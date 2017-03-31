@@ -14,29 +14,25 @@
 #include <QVector>
 #include <QStringList>
 #include <stdio.h>
+#include <QDebug>
+#include "itemTopico.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent)
 {
     setupUi(this);
 
-    for (int i = 0; i < 20; ++i) {
-        QListWidgetItem *item = new QListWidgetItem;
-        item->setSizeHint(QSize(150, 80));
-        listWidget->addItem(item);
-        QString teste = "sfoaihfsao";
-        ItemView *botao = new ItemView();
-        listWidget->setItemWidget(item, botao);             //Sets the widget to be displayed in the given item. This function should only be used to display static content in the place of a list widget item. If you want to display custom dynamic content or implement a custom editor widget, use QListView and subclass QItemDelegate instead.
-    }
+     //qDebug() << "IOHROSAHIORHA" << endl;
+   // qWarning() << "IOHROSAHIORHA" << endl;
 
 
-    QFile file("/home/luizotavio/bd.ata");
+    QFile file("/home/gilmarllen/bd.ata");
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
         return;
 
     QTextStream in(&file);
 
-    int id=1;
+    int id=0;
     while(!in.atEnd())
     {
         QString line = in.readLine();
@@ -51,7 +47,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
     file.close();
 
-    /*for(int i =0; i <comissoes.size();i++)
+    atualizar();
+
+
+
+/*    (int i =0; i <comissoes.size();i++)
     {
         QListWidgetItem *item = new QListWidgetItem;
         item = listWidget->currentItem();
@@ -61,6 +61,49 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     //ui->scrollContents->setContentsMargins(0,0,0,0);
+    atualizar();
+
+}
+
+void MainWindow::atualizar(){
+
+    listWidget->clear();
+
+    for (unsigned int i = 0; i < comissoes.size(); i++) {
+        QListWidgetItem *item = new QListWidgetItem;
+        item->setSizeHint(QSize(150, 80));
+        listWidget->addItem(item);
+        QString teste = comissoes[i].getNome();
+        ItemView *botao = new ItemView(teste,comissoes[i].getId(),this);
+        listWidget->setItemWidget(item, botao);
+
+        if(!comissoes[i].getAtivo())
+            continue;
+
+        QStringList topicos = comissoes[i].getTopicos();
+        for (int i = 0; i < topicos.size(); i++) {
+            QListWidgetItem *item = new QListWidgetItem;
+            item->setSizeHint(QSize(150, 80));
+            listWidget->addItem(item);
+            QString teste = topicos[i];
+            ItemTopico *topico = new ItemTopico(teste);
+            listWidget->setItemWidget(item, topico);
 
 
+        }
+
+
+
+    }
+
+}
+
+std::vector<comissao> MainWindow::getComissoes() const
+{
+    return comissoes;
+}
+
+void MainWindow::setComissoes(const std::vector<comissao> &value)
+{
+    comissoes = value;
 }

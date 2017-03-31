@@ -7,11 +7,16 @@
 class MainWindow : public QMainWindow, private Ui::MainWindow
 {
     Q_OBJECT
-    std::vector <comissao> comissoes;
-
 
 public:
     explicit MainWindow(QWidget *parent = 0);
+    void atualizar();
+
+
+    std::vector <comissao> comissoes;
+
+    std::vector<comissao> getComissoes() const;
+    void setComissoes(const std::vector<comissao> &value);
 };
 
 #endif // MAINWINDOW_H

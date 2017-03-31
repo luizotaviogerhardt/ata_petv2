@@ -1,4 +1,7 @@
 #include "itemview.h"
+#include <vector>
+#include <QDebug>
+#include "comissao.h"
 
 ItemView::ItemView(QWidget *parent) :
     QWidget(parent)
@@ -7,12 +10,19 @@ ItemView::ItemView(QWidget *parent) :
 }
 
 
-ItemView::ItemView(QString &string)
+ItemView::ItemView(QString &string, int id, MainWindow *janela)
 {
-      this->label->setText(string);
+      setupUi(this);
+      this->nome->setText(string);
+      this->id = id;
+      this->mw = janela;
+      //ItemView.label->setText(string);
 }
 
-void ItemView::setLabel(QString &string)
+void ItemView::on_nome_clicked()
 {
-     this->label->setText(string);
+    qWarning() << "CLICOU ESSA POHA";
+    mw->getComissoes()[id].setAtivo(!(mw->getComissoes()[id].getAtivo()));
+    mw->atualizar();
+
 }
