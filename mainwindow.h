@@ -13,10 +13,10 @@ public:
     void atualizar();
 
 
-    std::vector <comissao> comissoes;
+    std::vector <comissao>* comissoes;
 
     std::vector<comissao> getComissoes() const;
-    void setComissoes(const std::vector<comissao> &value);
+    void setComissoes(std::vector<comissao> *value);
 };
 
 #endif // MAINWINDOW_H

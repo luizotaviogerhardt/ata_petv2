@@ -22,6 +22,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     setupUi(this);
 
+    comissoes = new std::vector<comissao>();
+
      //qDebug() << "IOHROSAHIORHA" << endl;
    // qWarning() << "IOHROSAHIORHA" << endl;
 
@@ -41,7 +43,7 @@ MainWindow::MainWindow(QWidget *parent) :
         QStringList topicos = strList;
         topicos.pop_front();
         comissao cms(strList[0],id,topicos);
-        comissoes.push_back(cms);
+        comissoes->push_back(cms);
         id++;
     }
 
@@ -61,15 +63,16 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     //ui->scrollContents->setContentsMargins(0,0,0,0);
-    atualizar();
+    //atualizar();
 
 }
 
 void MainWindow::atualizar(){
 
     listWidget->clear();
+    //comissoes[0].setAtivo(true);
 
-    for (unsigned int i = 0; i < comissoes.size(); i++) {
+    for (unsigned int i = 0; i < comissoes->size(); i++) {
         QListWidgetItem *item = new QListWidgetItem;
         item->setSizeHint(QSize(150, 80));
         listWidget->addItem(item);
@@ -100,10 +103,10 @@ void MainWindow::atualizar(){
 
 std::vector<comissao> MainWindow::getComissoes() const
 {
-    return comissoes;
+    return *comissoes;
 }
 
-void MainWindow::setComissoes(const std::vector<comissao> &value)
+void MainWindow::setComissoes(std::vector<comissao>* value)
 {
     comissoes = value;
 }
