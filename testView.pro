@@ -18,13 +18,16 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     itemview.cpp \
     comissao.cpp \
-    itemTopico.cpp
+    itemTopico.cpp \
+    responsaveis.cpp
 
 HEADERS  += mainwindow.h \
     itemview.h \
     comissao.h \
-    itemTopico.h
+    itemTopico.h \
+    responsaveis.h
 
 FORMS    += mainwindow.ui \
     itemview.ui \
-    itemTopico.ui
+    itemTopico.ui \
+    responsaveis.ui

@@ -15,6 +15,7 @@ public:
     ItemTopico(QString &string, MainWindow* janela, int id_comissao, int id_caixa);
 private slots:
     void on_lineEdit_textChanged(const QString &arg1);
+    void on_button_responsaveis_clicked();
 };
 
 #endif // ITEMVIEW_H
