@@ -24,6 +24,7 @@ public:
     void setTopicos(const QStringList &value);
     bool getAtivo() const;
     void setAtivo(bool value);
+    void setTopicoPosicao(int pos, const QString &value);
 };
 
 #endif // COMISSAO_H

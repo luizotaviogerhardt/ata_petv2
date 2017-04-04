@@ -18,6 +18,7 @@ public:
 
 private slots:
     void on_nome_clicked();
+    void on_pushButton_clicked();
 };
 
 #endif // ITEMVIEW_H

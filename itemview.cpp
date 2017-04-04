@@ -13,30 +13,35 @@ ItemView::ItemView(QWidget *parent) :
 ItemView::ItemView(QString &string, int id, MainWindow *janela)
 {
       setupUi(this);
+
       this->nome->setText(string);
       this->id = id;
       this->mw = janela;
-      //ItemView.label->setText(string);
+      this->nome->setStyleSheet("background-color:gray;");
 }
 
 void ItemView::on_nome_clicked()
 {
-    qWarning() << "CLICOU ESSA POHA";
+    std::vector<comissao>* vetcom = mw->comissoes;
+    bool atual = (*vetcom)[id].getAtivo();
+    (*vetcom)[id].setAtivo(!atual);
+    mw->atualizar();
+}
 
-    std::vector<comissao> vetcom = mw->getComissoes();
+void ItemView::on_pushButton_clicked()
+{
+    std::vector<comissao>* vetcom = mw->comissoes;
+    QStringList topicos = (*vetcom)[id].getTopicos();
 
-    bool atual = vetcom[id].getAtivo();
+    if(topicos[topicos.size()-1] == "")
+    {
+        //this->pushButton->setDisabled(true);
+        return;
+    }
 
+    //this->pushButton->setDisabled(false);
 
-    qWarning() << vetcom[id].getNome() << endl;
-    QString a = "sdefinas";
-    vetcom[id].setNome(a);
-    vetcom[id].setAtivo(!atual);
-    qWarning() << vetcom[id].getNome() << " " << vetcom[id].getAtivo() << endl;
-
-
-
+    (*vetcom)[id].setTopicos(topicos+="");
 
     mw->atualizar();
-
 }

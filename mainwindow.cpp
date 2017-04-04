@@ -24,16 +24,12 @@ MainWindow::MainWindow(QWidget *parent) :
 
     comissoes = new std::vector<comissao>();
 
-     //qDebug() << "IOHROSAHIORHA" << endl;
-   // qWarning() << "IOHROSAHIORHA" << endl;
-
+    /*Leitura base de dados*/
 
     QFile file("/home/gilmarllen/bd.ata");
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
         return;
-
     QTextStream in(&file);
-
     int id=0;
     while(!in.atEnd())
     {
@@ -46,67 +42,44 @@ MainWindow::MainWindow(QWidget *parent) :
         comissoes->push_back(cms);
         id++;
     }
-
     file.close();
 
     atualizar();
-
-
-
-/*    (int i =0; i <comissoes.size();i++)
-    {
-        QListWidgetItem *item = new QListWidgetItem;
-        item = listWidget->currentItem();
-        item->setText(comissoes[i].getNome());
-    }*/
-
-
-
-    //ui->scrollContents->setContentsMargins(0,0,0,0);
-    //atualizar();
-
 }
 
 void MainWindow::atualizar(){
 
     listWidget->clear();
-    //comissoes[0].setAtivo(true);
 
-    for (unsigned int i = 0; i < comissoes->size(); i++) {
+    for (unsigned int i = 0; i < comissoes->size(); i++)
+    {
         QListWidgetItem *item = new QListWidgetItem;
         item->setSizeHint(QSize(150, 80));
+        //item->setBackgroundColor("");
+        item->setFlags(item->flags() & Qt::ItemIsSelectable);
         listWidget->addItem(item);
-        QString teste = comissoes[i].getNome();
-        ItemView *botao = new ItemView(teste,comissoes[i].getId(),this);
+
+        QString texto_caixa = (*comissoes)[i].getNome();
+        ItemView *botao = new ItemView(texto_caixa,(*comissoes)[i].getId(),this);
         listWidget->setItemWidget(item, botao);
 
-        if(!comissoes[i].getAtivo())
+        if(!(*comissoes)[i].getAtivo())
             continue;
 
-        QStringList topicos = comissoes[i].getTopicos();
-        for (int i = 0; i < topicos.size(); i++) {
-            QListWidgetItem *item = new QListWidgetItem;
-            item->setSizeHint(QSize(150, 80));
+        QStringList topicos = (*comissoes)[i].getTopicos();
+        for (int j = 0; j < topicos.size(); j++) {
+            item = new QListWidgetItem;
+            item->setSizeHint(QSize(150, 50));
+            item->setBackgroundColor("green");
+            item->setFlags(item->flags() & Qt::ItemIsSelectable);
             listWidget->addItem(item);
-            QString teste = topicos[i];
-            ItemTopico *topico = new ItemTopico(teste);
+
+            texto_caixa = topicos[j];
+            ItemTopico *topico = new ItemTopico(texto_caixa, this, i, j);
             listWidget->setItemWidget(item, topico);
 
-
+            //connect(topico, &ItemTopico::on_lineEdit_textChanged, botao, &ItemView::_on_caixa_changed);
         }
-
-
-
     }
 
-}
-
-std::vector<comissao> MainWindow::getComissoes() const
-{
-    return *comissoes;
-}
-
-void MainWindow::setComissoes(std::vector<comissao>* value)
-{
-    comissoes = value;
 }

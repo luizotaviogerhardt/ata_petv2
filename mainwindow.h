@@ -12,11 +12,7 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     void atualizar();
 
-
-    std::vector <comissao>* comissoes;
-
-    std::vector<comissao> getComissoes() const;
-    void setComissoes(std::vector<comissao> *value);
+    std::vector<comissao>* comissoes;
 };
 
 #endif // MAINWINDOW_H

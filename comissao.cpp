@@ -50,6 +50,11 @@ comissao::comissao(QString &nome, int id, QStringList &topicos)
     this->ativo = false;
 }
 
+void comissao::setTopicoPosicao(int pos, const QString &value)
+{
+    this->topicos.replace(pos, value);
+}
+
 comissao::~comissao()
 {
 
