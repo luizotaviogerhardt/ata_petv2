@@ -19,15 +19,18 @@ SOURCES += main.cpp\
     itemview.cpp \
     comissao.cpp \
     itemTopico.cpp \
-    responsaveis.cpp
+    responsaveis.cpp \
+    responsaveisdialog.cpp
 
 HEADERS  += mainwindow.h \
     itemview.h \
     comissao.h \
     itemTopico.h \
-    responsaveis.h
+    responsaveis.h \
+    responsaveisdialog.h
 
 FORMS    += mainwindow.ui \
     itemview.ui \
     itemTopico.ui \
-    responsaveis.ui
+    responsaveis.ui \
+    responsaveisdialog.ui

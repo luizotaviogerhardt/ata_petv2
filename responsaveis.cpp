@@ -2,6 +2,7 @@
 #include "ui_responsaveis.h"
 #include <QString>
 #include <QRadioButton>
+#include <QWidget>
 
 responsaveis::responsaveis(QWidget *parent) :
     QWidget(parent),
@@ -20,7 +21,7 @@ responsaveis::responsaveis(QWidget *parent) :
 
         //texto_caixa = topicos[j];
         QRadioButton *botao = new QRadioButton(resps[j]);
-        listWidget->setItemWidget(item, botao);
+        ui->listWidget->setItemWidget(item, botao);
 
         //connect(topico, &ItemTopico::on_lineEdit_textChanged, botao, &ItemView::_on_caixa_changed);
     }

@@ -20,7 +20,7 @@ QStringList comissao::getTopicos() const
 
 void comissao::setTopicos(const QStringList &value)
 {
-    topicos = value;
+    topicos = value; 
 }
 
 bool comissao::getAtivo() const
@@ -53,6 +53,26 @@ comissao::comissao(QString &nome, int id, QStringList &topicos)
 void comissao::setTopicoPosicao(int pos, const QString &value)
 {
     this->topicos.replace(pos, value);
+}
+
+void comissao::insereResponsavel(int idresp, int idtopico)
+{
+    for(int i =0;i<resps_topico[idtopico].size();i++)
+    {
+        if(resps_topico[idtopico][i] == idresp)
+            return;
+    }
+    resps_topico[idtopico].push_back(idresp);
+}
+
+bool comissao::eResponsavel(int idresp,int idtopico)
+{
+    for(int i =0;i<resps_topico[idtopico].size();i++)
+    {
+        if(resps_topico[idtopico][i] == idresp)
+            return true;
+    }
+    return false;
 }
 
 comissao::~comissao()

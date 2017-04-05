@@ -1,6 +1,7 @@
 #include "itemTopico.h"
 #include <QDebug>
 #include "responsaveis.h"
+#include "responsaveisdialog.h"
 
 
 ItemTopico::ItemTopico(QString &string, MainWindow *janela, int id_comissao, int id_caixa)
@@ -26,7 +27,7 @@ void ItemTopico::on_lineEdit_textChanged(const QString &arg1)
 
 void ItemTopico::on_button_responsaveis_clicked()
 {
-    responsaveis resp;
-    resp.setModal(true);
+    responsaveisDialog resp(this,mw,id_caixa,id_comissao);
+    //resp.setModal(true);
     resp.exec();
 }

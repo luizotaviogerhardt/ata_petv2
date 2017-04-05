@@ -2,6 +2,7 @@
 #define RESPONSAVEIS_H
 
 #include <QWidget>
+#include <QDialog>
 
 namespace Ui {
 class responsaveis;

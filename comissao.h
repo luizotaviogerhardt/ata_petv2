@@ -1,6 +1,8 @@
 #ifndef COMISSAO_H
 #define COMISSAO_H
 
+const int TAM = 100;
+
 #include <QString>
 #include <vector>
 #include <QStringList>
@@ -11,6 +13,7 @@ class comissao
     QString nome;
     int id;
     QStringList topicos;
+    std::vector<int> resps_topico[TAM];
     bool ativo;
 
 public:
@@ -25,6 +28,9 @@ public:
     bool getAtivo() const;
     void setAtivo(bool value);
     void setTopicoPosicao(int pos, const QString &value);
+    void insereResponsavel(int idresp,int idtopico);
+    bool eResponsavel(int idresp,int idtopico);
+
 };
 
 #endif // COMISSAO_H
